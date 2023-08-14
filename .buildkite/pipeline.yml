@@ -1,6 +1,24 @@
 steps:
   - command: |
-      npm install
+      set -ex
+
+      # Cache ~/.npm
+      mkdir -p /npm-cache/.npm /root/.npm
+      mount --bind /npm-cache/.npm /root/.npm
+
+      # Cache node_modules
+      mkdir -p /npm-cache/buildkite-demo-remix/node_modules ./node_modules
+      mount --bind /npm-cache/buildkite-demo-remix/node_modules ./node_modules
+
+      # Verify cache size
+      du -chs ./node_modules /root/.npm
+
+      # Run workflow
+      time npm install
       npm run test
+
     agents:
       nsc-base-image-ref: node
+      nsc-cache-tag: buildkite-demo-remix/npm-cache
+      nsc-cache-path: /npm-cache
+      nsc-cache-size: 1000m
