@@ -50,7 +50,7 @@ exports[`ItemTitle component renders news item properties passed in as props 1`]
            
           (
           <a
-            href="from?site=www.nytimes.com"
+            href="/from?site=www.nytimes.com"
           >
             <span
               class="sitestr"
