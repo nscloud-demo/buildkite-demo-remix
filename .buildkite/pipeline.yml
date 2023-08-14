@@ -1,0 +1,6 @@
+steps:
+  - command: |
+      npm install
+      npm run test
+    agents:
+      nsc-base-image-ref: node
