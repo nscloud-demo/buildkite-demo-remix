@@ -14,6 +14,7 @@ jobs:
       - nscloud-ubuntu-22.04-amd64-8x16-with-cache
       - nscloud-cache-size-5gb
       - nscloud-cache-tag-gha-demo-remix
+      - nscloud-cache-runner-tool
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
