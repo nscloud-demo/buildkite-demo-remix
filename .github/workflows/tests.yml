@@ -14,23 +14,25 @@ jobs:
       - nscloud-ubuntu-22.04-amd64-8x16-with-cache
       - nscloud-cache-size-5gb
       - nscloud-cache-tag-gha-demo-remix
-      - nscloud-cache-runner-tool
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
       
-      - name: Local cache for API dependencies
-        id: api-cache
-        uses: MasterworksIO/action-local-cache@2
-        with:
-          path: './node_modules/'
-          key: 'npm-cache'
-        env:
-          RUNNER_TOOL_CACHE: "/cache"
+      - name: Setup cache
+        run: |
+          # Cache ~/.npm
+          mkdir -p /cache/npm-cache/.npm ~/.npm
+          mount --bind /cache/npm-cache/.npm ~/.npm
+
+          # Cache node_modules
+          mkdir -p /cache/npm-cache/demo-remix/node_modules ./node_modules
+          mount --bind /cache/npm-cache/demo-remix/node_modules ./node_modules
+
+          # Verify cache size
+          du -chs ./node_modules ~/.npm
 
       - name: Install dependencies
         run: npm install
-        if: steps.api-cache.outputs.cache-hit != 'true'
 
       - name: NPM tests
         run: npm run test
