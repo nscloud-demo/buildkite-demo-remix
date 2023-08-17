@@ -22,11 +22,11 @@ jobs:
         run: |
           # Cache ~/.npm
           mkdir -p /cache/npm-cache/.npm ~/.npm
-          mount --bind /cache/npm-cache/.npm ~/.npm
+          sudo mount --bind /cache/npm-cache/.npm ~/.npm
 
           # Cache node_modules
           mkdir -p /cache/npm-cache/demo-remix/node_modules ./node_modules
-          mount --bind /cache/npm-cache/demo-remix/node_modules ./node_modules
+          sudo mount --bind /cache/npm-cache/demo-remix/node_modules ./node_modules
 
           # Verify cache size
           du -chs ./node_modules ~/.npm
