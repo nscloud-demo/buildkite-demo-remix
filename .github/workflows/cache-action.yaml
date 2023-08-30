@@ -1,0 +1,35 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - "*"
+  workflow_dispatch: 
+
+name: Tests
+jobs:
+  tests:
+    runs-on:
+      - nscloud-ubuntu-22.04-amd64-8x16-with-cache
+      - nscloud-cache-size-5gb
+      - nscloud-cache-tag-gha-demo-remix
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup npm cache
+        uses: namespacelabs/nscloud-cache-action@aaf178a2ab85acb742a5912a75ed7a3d1865d338
+        with:
+          path: |
+            ~/.npm
+            ./node_modules
+          key: ${{ runner.os }}-npm
+          local-cache: true
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: NPM tests
+        run: npm run test
+    
