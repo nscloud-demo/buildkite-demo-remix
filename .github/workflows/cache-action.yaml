@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup npm cache
-        uses: namespacelabs/nscloud-cache-action@a94f53552973f97728f59bb656f6a1106ec2e579
+        uses: namespacelabs/nscloud-cache-action@v0
         with:
           path: |
             ~/.npm
