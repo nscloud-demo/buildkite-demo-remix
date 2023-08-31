@@ -18,12 +18,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Breakpoint if tests failed
-        uses: namespacelabs/breakpoint-action@v0
-        with:
-          duration: 30m
-          authorized-users: gmichelo
-
       - name: Setup npm cache
         uses: namespacelabs/nscloud-cache-action@e68bcb0b272eeb498b68dfbaf053f67a66389a0d
         with:
