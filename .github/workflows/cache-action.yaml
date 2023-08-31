@@ -24,7 +24,8 @@ jobs:
           path: |
             ~/.npm
             ./node_modules
-          use-cache-volume: true
+          key: Linux-npm
+          use-cache-volume: false
 
       - name: Install dependencies
         run: npm install
